@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zetamind — L'agent IA qui fait avancer votre business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+:root{
+  --bg:#08070A;
+  --bg2:#0F0D12;
+  --bg3:#161320;
+  --gold:#C9A84C;
+  --gold2:#E2C87A;
+  --gold-dim:rgba(201,168,76,.1);
+  --gold-border:rgba(201,168,76,.2);
+  --cream:#F0EBE0;
+  --cream2:#9B9288;
+  --cream3:#504840;
+  --border:rgba(255,255,255,.05);
+  --border2:rgba(201,168,76,.15);
+}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;inset:0 0 auto;z-index:100;height:60px;padding:0 clamp(20px,5vw,64px);display:flex;align-items:center;justify-content:space-between;background:rgba(8,7,10,.88);backdrop-filter:blur(28px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.03em;color:var(--cream)}
+.logo em{font-style:normal;color:var(--gold)}
+.nav-cta{padding:9px 22px;background:var(--gold);color:#000;font-size:13px;font-weight:500;border-radius:100px;text-decoration:none;transition:background .15s,transform .15s;min-height:44px;display:flex;align-items:center}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding:100px clamp(20px,5vw,64px) 72px;display:flex;align-items:center;position:relative;overflow:hidden}
+/* Image fond hero */
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.15}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,7,10,.97) 50%,rgba(8,7,10,.6) 85%,rgba(8,7,10,.3) 100%)}
+.hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+
+/* Typeframe d'abord — copy primaire */
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:32px}
+.eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);flex-shrink:0}
+.eyebrow-text{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);font-weight:500}
+.hero-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,5.5vw,70px);line-height:.97;letter-spacing:-.04em;color:var(--cream);margin-bottom:8px}
+.hero-h1-serif{font-family:'Instrument Serif',serif;font-style:italic;display:block;color:var(--gold);font-size:clamp(42px,6vw,76px);line-height:.97;margin-bottom:28px}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--cream2);line-height:1.75;max-width:460px;margin-bottom:40px}
+.hero-sub strong{color:var(--cream);font-weight:400}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:56px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;background:var(--gold);color:#000;font-size:15px;font-weight:500;border-radius:100px;text-decoration:none;transition:background .15s,transform .2s,box-shadow .2s;min-height:52px;box-shadow:0 4px 24px rgba(201,168,76,.25)}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,168,76,.35)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:15px 24px;border:1px solid rgba(255,255,255,.12);color:var(--cream2);font-size:14px;border-radius:100px;text-decoration:none;transition:border-color .15s,color .15s;min-height:52px}
+.btn-ghost:hover{border-color:var(--gold-border);color:var(--cream)}
+/* Stats hero */
+.hero-proof{display:flex;gap:36px;flex-wrap:wrap}
+.proof-item{}
+.proof-num{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,40px);letter-spacing:-.04em;color:var(--cream);line-height:1}
+.proof-num span{color:var(--gold)}
+.proof-label{font-size:12px;color:var(--cream3);margin-top:3px}
+
+/* Visuel hero — dashboard mockup */
+.hero-visual{position:relative}
+.hero-card{background:rgba(22,19,32,.9);border:1px solid var(--border2);border-radius:20px;padding:28px;backdrop-filter:blur(20px);box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 60px rgba(201,168,76,.06)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.card-header-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.card-title{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--cream3);font-weight:500}
+.card-metric{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.card-metric:last-child{border-bottom:none}
+.card-metric-label{font-size:13px;color:var(--cream2)}
+.card-metric-value{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--cream)}
+.card-metric-value.up{color:var(--gold)}
+.card-bar{height:3px;background:rgba(255,255,255,.06);border-radius:3px;margin-top:6px;overflow:hidden}
+.card-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+
+/* ── SECTIONS ── */
+.section{padding:88px clamp(20px,5vw,64px)}
+.container{max-width:1080px;margin:0 auto}
+.eyebrow-sm{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);font-weight:600;margin-bottom:14px}
+.h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4.5vw,52px);line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:14px}
+.h2 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--gold)}
+.lead{font-size:clamp(15px,1.8vw,17px);color:var(--cream2);line-height:1.75;max-width:520px}
+
+/* ── PROBLÈME ── */
+.problem{background:var(--bg)}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+@media(max-width:768px){.prob-grid{grid-template-columns:1fr}}
+.prob-card{background:var(--bg2);padding:40px 32px;transition:background .25s;position:relative;overflow:hidden}
+.prob-card:first-child{border-radius:20px 0 0 20px}
+.prob-card:last-child{border-radius:0 20px 20px 0}
+@media(max-width:768px){.prob-card,.prob-card:first-child,.prob-card:last-child{border-radius:0}.prob-card:first-child{border-radius:16px 16px 0 0}.prob-card:last-child{border-radius:0 0 16px 16px}}
+.prob-card:hover{background:var(--bg3)}
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-border),transparent);opacity:0;transition:opacity .25s}
+.prob-card:hover::before{opacity:1}
+.prob-n{font-family:'Syne',sans-serif;font-weight:800;font-size:72px;color:rgba(201,168,76,.07);line-height:1;margin-bottom:20px;letter-spacing:-.05em}
+.prob-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:19px;color:var(--cream);letter-spacing:-.02em;margin-bottom:10px}
+.prob-card p{font-size:14px;color:var(--cream2);line-height:1.75}
+
+/* ── SOLUTION ── */
+.solution{background:var(--bg2)}
+.sol-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:56px}
+@media(max-width:768px){.sol-inner{grid-template-columns:1fr}}
+.sol-list{display:flex;flex-direction:column;gap:0}
+.sol-item{display:flex;gap:18px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--border)}
+.sol-item:last-child{border-bottom:none}
+.sol-num{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--gold);opacity:.6;min-width:24px;margin-top:2px}
+.sol-item h4{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--cream);letter-spacing:-.02em;margin-bottom:4px}
+.sol-item p{font-size:13px;color:var(--cream2);line-height:1.65}
+/* Visuel solution */
+.sol-visual{position:relative}
+.sol-img{width:100%;border-radius:20px;overflow:hidden;aspect-ratio:4/3;position:relative}
+.sol-img img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(20%);transition:filter .3s}
+.sol-img:hover img{filter:grayscale(0%)}
+.sol-img-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,7,10,.7),transparent)}
+.sol-badge{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(8,7,10,.9);border:1px solid var(--gold-border);border-radius:12px;padding:14px 18px;backdrop-filter:blur(20px)}
+.sol-badge-num{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--gold);letter-spacing:-.04em}
+.sol-badge-text{font-size:12px;color:var(--cream2);margin-top:2px}
+
+/* ── PROOF (social/evidence) ── */
+.proof-section{background:var(--bg)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+@media(max-width:640px){.proof-grid{grid-template-columns:1fr;gap:12px}}
+.proof-card{background:var(--bg2);padding:40px 32px;position:relative;overflow:hidden}
+.proof-card:first-child{border-radius:20px 0 0 20px}
+.proof-card:last-child{border-radius:0 20px 20px 0}
+@media(max-width:640px){.proof-card,.proof-card:first-child,.proof-card:last-child{border-radius:16px}}
+.proof-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.25),transparent)}
+.proof-stat{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(44px,5vw,64px);letter-spacing:-.05em;background:linear-gradient(135deg,var(--cream) 0%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px}
+.proof-desc{font-size:14px;color:var(--cream2);line-height:1.6;margin-bottom:6px}
+.proof-source{font-size:11px;color:var(--cream3);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+
+/* ── CLEARING DOUBTS ── */
+.doubts{background:var(--bg2)}
+.doubts-grid{display:flex;flex-direction:column;gap:0;margin-top:48px;max-width:720px}
+.doubt-item{padding:24px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.doubt-item:last-child{border-bottom:none}
+.doubt-icon{width:36px;height:36px;border-radius:10px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.doubt-icon svg{width:16px;height:16px;color:var(--gold)}
+.doubt-q{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--cream);margin-bottom:6px;letter-spacing:-.01em}
+.doubt-a{font-size:14px;color:var(--cream2);line-height:1.7}
+
+/* ── ABOUT ── */
+.about-section{background:var(--bg)}
+.about-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:center;margin-top:56px}
+@media(max-width:768px){.about-inner{grid-template-columns:1fr}}
+.about-img-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:20px;filter:grayscale(20%)}
+.about-img-card{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(8,7,10,.92);backdrop-filter:blur(20px);border:1px solid var(--gold-border);border-radius:14px;padding:16px 20px;display:flex;gap:14px;align-items:center}
+.about-card-stat{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--gold);letter-spacing:-.04em;white-space:nowrap}
+.about-card-text{font-size:12px;color:var(--cream2);line-height:1.5}
+.about-text .h2{margin-bottom:20px}
+.about-text p{color:var(--cream2);font-size:16px;line-height:1.85;margin-bottom:18px}
+.about-text p strong{color:var(--cream);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chip{padding:6px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--cream3);transition:border-color .15s,color .15s}
+.chip:hover{border-color:var(--gold-border);color:var(--cream2)}
+
+/* ── CTA FINAL ── */
+.cta-section{position:relative;padding:100px clamp(20px,5vw,64px);overflow:hidden}
+.cta-bg{position:absolute;inset:0;z-index:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover;opacity:.07}
+.cta-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.08),var(--bg2) 70%)}
+.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;text-align:center}
+.cta-inner .h2{margin-bottom:16px}
+.cta-inner .lead{margin:0 auto 36px;text-align:center}
+.cta-note{margin-top:16px;font-size:12px;color:var(--cream3)}
+
+/* ── FOOTER ── */
+footer{padding:28px clamp(20px,5vw,64px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--cream2);letter-spacing:-.02em}
+.footer-logo em{font-style:normal;color:var(--gold)}
+.footer-copy{font-size:12px;color:var(--cream3)}
+footer a{color:var(--gold);text-decoration:none}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+@media(max-width:480px){.hero-inner{gap:40px}.btn-primary,.btn-ghost{width:100%;justify-content:center}.hero-actions{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Navigation">
+  <span class="logo">Zeta<em>mind</em></span>
+  <a href="#contact" class="nav-cta">Prendre contact</a>
+</nav>
+
+<!-- HERO — Typeframe first -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1920&q=80&auto=format&fit=crop" alt="">
+  </div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span class="eyebrow-text">Agent IA sur-mesure · Disponible 24h/24</span>
+      </div>
+      <h1>
+        <span class="hero-h1" id="hero-h1">Votre prochain</span>
+        <em class="hero-h1-serif">collaborateur</em>
+      </h1>
+      <p class="hero-sub">Vous avez les idées. Vous manquez de temps. <strong>Un agent IA configuré sur votre réalité</strong> mémorise, automatise et agit — pendant que vous construisez.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Réserver un appel
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#solution" class="btn-ghost">Comment ça marche</a>
+      </div>
+      <div class="hero-proof" role="list">
+        <div role="listitem">
+          <div class="proof-num"><span data-target="94">0</span>%</div>
+          <div class="proof-label">CA digital · VINCI</div>
+        </div>
+        <div role="listitem">
+          <div class="proof-num"><span data-target="70">0</span>%</div>
+          <div class="proof-label">Ventes en ligne · Longchamp</div>
+        </div>
+        <div role="listitem">
+          <div class="proof-num"><span data-target="15">0</span></div>
+          <div class="proof-label">ans d'expertise</div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard card -->
+    <div class="hero-card" aria-hidden="true">
+      <div class="card-header">
+        <span class="card-header-dot"></span>
+        <span class="card-title">Agent actif — aujourd'hui</span>
+      </div>
+      <div class="card-metric">
+        <div>
+          <div class="card-metric-label">Tâches traitées</div>
+          <div class="card-bar"><div class="card-bar-fill" style="width:87%"></div></div>
+        </div>
+        <div class="card-metric-value up">87%</div>
+      </div>
+      <div class="card-metric">
+        <div>
+          <div class="card-metric-label">Temps libéré / semaine</div>
+          <div class="card-bar"><div class="card-bar-fill" style="width:72%"></div></div>
+        </div>
+        <div class="card-metric-value up">32h</div>
+      </div>
+      <div class="card-metric">
+        <div>
+          <div class="card-metric-label">Mémoire active</div>
+          <div class="card-bar"><div class="card-bar-fill" style="width:60%"></div></div>
+        </div>
+        <div class="card-metric-value">754 points</div>
+      </div>
+      <div class="card-metric">
+        <div>
+          <div class="card-metric-label">Disponibilité</div>
+        </div>
+        <div class="card-metric-value up">24h/24</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLÈME -->
+<section class="problem section reveal" aria-labelledby="prob-h">
+  <div class="container">
+    <p class="eyebrow-sm">Ce que vous vivez</p>
+    <h2 class="h2" id="prob-h">Sans IA, vous portez tout.<br><em>Seul.</em></h2>
+    <div class="prob-grid">
+      <div class="prob-card reveal d1">
+        <div class="prob-n" aria-hidden="true">01</div>
+        <h3>Le temps disparaît</h3>
+        <p>Emails, comptes-rendus, recherches. Vous faites le travail d'une équipe. Ça ne finit jamais et ça ne s'améliore pas tout seul.</p>
+      </div>
+      <div class="prob-card reveal d2">
+        <div class="prob-n" aria-hidden="true">02</div>
+        <h3>L'information se perd</h3>
+        <p>Retrouver un contexte prend 20 minutes. Prendre une décision éclairée en prend des heures. Votre cerveau n'en peut plus.</p>
+      </div>
+      <div class="prob-card reveal d3">
+        <div class="prob-n" aria-hidden="true">03</div>
+        <h3>Les opportunités passent</h3>
+        <p>Pendant que vous gérez l'urgence, des prospects refroidissent, des tendances émergent. Vos concurrents ne font pas la même erreur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution section reveal" id="solution" aria-labelledby="sol-h">
+  <div class="container">
+    <p class="eyebrow-sm">Ce que fait Zetamind</p>
+    <h2 class="h2" id="sol-h">Il apprend.<br>Il mémorise. <em>Il agit.</em></h2>
+    <div class="sol-inner">
+      <div class="sol-list">
+        <div class="sol-item reveal d1">
+          <span class="sol-num">01</span>
+          <div>
+            <h4>Mémoire persistante</h4>
+            <p>Chaque décision, contact, contexte projet stocké. Il sait où vous en êtes — sans que vous le répétiez.</p>
+          </div>
+        </div>
+        <div class="sol-item reveal d2">
+          <span class="sol-num">02</span>
+          <div>
+            <h4>Automatisation sur-mesure</h4>
+            <p>Vos processus répétitifs disparaissent. Rapports, alertes, workflows — zéro intervention manuelle.</p>
+          </div>
+        </div>
+        <div class="sol-item reveal d3">
+          <span class="sol-num">03</span>
+          <div>
+            <h4>Intégré à votre stack</h4>
+            <p>Notion, Slack, Drive, CRM, n8n. L'agent s'adapte à ce que vous avez déjà.</p>
+          </div>
+        </div>
+        <div class="sol-item reveal d1">
+          <span class="sol-num">04</span>
+          <div>
+            <h4>Opérationnel en 7 jours</h4>
+            <p>Un onboarding de 60 minutes. Le reste, c'est lui qui gère.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sol-visual reveal">
+        <div class="sol-img">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop" alt="Automatisation IA">
+          <div class="sol-img-overlay"></div>
+          <div class="sol-badge">
+            <div class="sol-badge-num">+94%</div>
+            <div class="sol-badge-text">CA digital récupéré · VINCI Immobilier</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREUVE -->
+<section class="proof-section section reveal" aria-labelledby="proof-h">
+  <div class="container">
+    <p class="eyebrow-sm">Résultats prouvés</p>
+    <h2 class="h2" id="proof-h">Des chiffres réels.<br><em>Pas des promesses.</em></h2>
+    <div class="proof-grid">
+      <div class="proof-card reveal d1">
+        <div class="proof-stat"><span data-target="94">0</span>%</div>
+        <p class="proof-desc">d'augmentation du CA digital en 3 ans</p>
+        <p class="proof-source">VINCI Immobilier</p>
+      </div>
+      <div class="proof-card reveal d2">
+        <div class="proof-stat"><span data-target="70">0</span>%</div>
+        <p class="proof-desc">de hausse des ventes en ligne — année record</p>
+        <p class="proof-source">Longchamp</p>
+      </div>
+      <div class="proof-card reveal d3">
+        <div class="proof-stat"><span data-target="15">0</span>ans</div>
+        <p class="proof-desc">de transformation digitale dans des organisations sans droit à l'erreur</p>
+        <p class="proof-source">LVMH · L'Oréal · Capgemini</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLEARING DOUBTS -->
+<section class="doubts section reveal" aria-labelledby="doubts-h">
+  <div class="container">
+    <p class="eyebrow-sm">Ce que vous vous demandez</p>
+    <h2 class="h2" id="doubts-h">Les vraies questions.<br><em>Les vraies réponses.</em></h2>
+    <div class="doubts-grid">
+      <div class="doubt-item reveal d1">
+        <div class="doubt-icon" aria-hidden="true">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        </div>
+        <div>
+          <p class="doubt-q">C'est du consulting classique ou quelque chose d'autre ?</p>
+          <p class="doubt-a">Autre chose. Pas de livrables PowerPoint ni de réunions d'alignement interminables. Un agent IA actif dans votre environnement, qui agit en continu. Vous voyez les résultats dès la première semaine.</p>
+        </div>
+      </div>
+      <div class="doubt-item reveal d2">
+        <div class="doubt-icon" aria-hidden="true">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <p class="doubt-q">Mes données sont-elles en sécurité ?</p>
+          <p class="doubt-a">L'agent tourne sur infrastructure dédiée, en Europe, avec accès limité à ce que vous autorisez. Aucune donnée ne passe par des serveurs tiers non contrôlés.</p>
+        </div>
+      </div>
+      <div class="doubt-item reveal d3">
+        <div class="doubt-icon" aria-hidden="true">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <p class="doubt-q">Combien de temps ça prend avant que ça fonctionne vraiment ?</p>
+          <p class="doubt-a">7 jours pour l'onboarding complet. Dès le J+1, l'agent est actif. La montée en puissance est continue — il devient meilleur à chaque échange.</p>
+        </div>
+      </div>
+      <div class="doubt-item reveal d1">
+        <div class="doubt-icon" aria-hidden="true">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <div>
+          <p class="doubt-q">Est-ce que ça vaut vraiment 1 500€/mois ?</p>
+          <p class="doubt-a">Si l'agent récupère 10h/semaine sur votre agenda, et que votre heure vaut 150€, c'est 6 000€ de valeur par mois. L'abonnement s'auto-finance en général dès la première semaine.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section section reveal" aria-labelledby="about-h">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-img-wrap">
+        <img class="about-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop" alt="Cédric Atticot">
+        <div class="about-img-card">
+          <div class="about-card-stat">15</div>
+          <div class="about-card-text">ans de terrain dans<br>des organisations sans droit à l'erreur</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="eyebrow-sm">À propos</p>
+        <h2 class="h2" id="about-h">Cédric Atticot<br><em>Praticien, pas théoricien.</em></h2>
+        <p>ESSEC Business School. 15 ans à transformer des entreprises — VINCI, Longchamp, LVMH, L'Oréal — dans des contextes où l'erreur avait un coût réel.</p>
+        <p><strong>Zetamind, c'est ce que j'ai construit pour moi.</strong> Ce qui me permet de travailler avec la puissance d'une équipe entière, seul. Je ne vends pas une promesse. Je vous montre ce que j'utilise moi-même, chaque jour.</p>
+        <div class="chips" role="list">
+          <span class="chip" role="listitem">ESSEC Business School</span>
+          <span class="chip" role="listitem">VINCI Immobilier</span>
+          <span class="chip" role="listitem">Longchamp</span>
+          <span class="chip" role="listitem">LVMH / Louis Vuitton</span>
+          <span class="chip" role="listitem">L'Oréal</span>
+          <span class="chip" role="listitem">n8n · Agent IA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section reveal" id="contact" aria-labelledby="cta-h">
+  <div class="cta-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&q=80&auto=format&fit=crop" alt="">
+  </div>
+  <div class="cta-inner">
+    <p class="eyebrow-sm">Prêt ?</p>
+    <h2 class="h2" id="cta-h">30 minutes.<br><em>Une décision qui change tout.</em></h2>
+    <p class="lead">Pas d'engagement. Une conversation pour voir si Zetamind peut transformer votre façon de travailler.</p>
+    <a href="https://calendly.com/calt-digital/prise-de-contact" class="btn-primary" style="display:inline-flex;margin:0 auto">
+      Réserver mon appel
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <p class="cta-note">Sans engagement · Réponse sous 24h · 100% en ligne</p>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Zeta<em>mind</em></span>
+  <p class="footer-copy">© 2026 Cédric Atticot · <a href="https://calendly.com/calt-digital/prise-de-contact">Contact</a></p>
+</footer>
+
+<script>
+// Reveal
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Counters
+const cObs=new IntersectionObserver(e=>{e.forEach(el=>{if(!el.isIntersecting)return;const t=+el.target.dataset.target,d=1400;let c=0,s=t/(d/16);const r=setInterval(()=>{c=Math.min(c+s,t);el.target.textContent=Math.round(c);if(c>=t)clearInterval(r)},16);cObs.unobserve(el.target)});},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
+</script>
+</body>
+</html>
